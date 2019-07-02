@@ -16,8 +16,17 @@
   <!-- Bootstrap core CSS -->
   <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+<!-- Bootstrap core JavaScript -->
+  <script src="/resources/vendor/jquery/jquery.min.js"></script>
+  <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
   <!-- Custom styles for this template -->
-  <link href="/resources/css/blog-post.css" rel="stylesheet">
+   <link href="/resources/css/blog-post.css" rel="stylesheet">
+  <link href="/resources/css/custom.css" rel="stylesheet">
+ 
+  
+
+  
 
 </head>
 
@@ -72,13 +81,6 @@
 
         <!-- Date/Time -->
         <p>${newPost.post_regdate }</p>
-
-        <hr>
-
-        <!-- Preview Image -->
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
-        <hr>
 
         <!-- Post Content -->
         
@@ -166,42 +168,19 @@
           </div>
         </div>
 
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
+	<!-- Side Widget -->
+      <div class="card my-4">
+          <h5 class="card-header">Main Menu</h5>
           <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <ul>
+            <li><a href="#" id="writeTag">게시글 작성</a></li>
+            </ul>
           </div>
         </div>
+ 
+ 
 
-        <!-- Side Widget -->
+        
         <div class="card my-4">
           <h5 class="card-header">Side Widget</h5>
           <div class="card-body">
@@ -216,6 +195,67 @@
 
   </div>
   <!-- /.container -->
+  
+  
+   
+ 
+  
+   <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="closeBtn">&times;</span>                                                               
+        <p>Some text in the Modal..</p>
+      </div>
+ 
+    </div>
+  
+  
+  
+
+  
+  <script>
+  var modal = document.getElementById('myModal');
+  
+  var span = document.getElementsByClassName("close")[0];
+  
+  var writeTag = document.getElementById("writeTag");
+  
+  writeTag.onclick = function() {
+      modal.style.display = "block";
+  }
+
+//When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+
+ 
+  
+  </script>
+  
+     <style>
+  
+  
+  </style>
+  
+  
+  
+  
+  
+ 
+
+  
+  
+  
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
@@ -225,9 +265,9 @@
     <!-- /.container -->
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="/resources/vendor/jquery/jquery.min.js"></script>
-  <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+
+  
 
 </body>
 </html>
