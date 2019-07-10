@@ -22,4 +22,25 @@ ORDER BY post_regdate DESC limit 1
 
 </select>
 
+
+<insert id="insertNewPost">
+insert into posts(
+		post_writer_idx, 
+		post_password, 
+		post_title, 
+		post_contents, 
+		post_regdate
+		)
+		
+values(
+		#{post_writer_idx}, 
+		#{post_password}, 
+		#{post_title}, 
+		#{post_contents},
+		now())
+
+
+
+</insert>
+
 </mapper>

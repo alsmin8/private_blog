@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gm.practice.mapper.PostMapper;
+import gm.practice.model.PostBean;
 import gm.practice.model.PostTo;
 import lombok.Setter;
 
@@ -26,6 +27,16 @@ public class PostService {
 	public PostTo getNewPost(){
 		
 		return mapper.getNewPost();
+	}
+	
+	public void insertPostService(PostBean postbean){
+		
+		
+
+		mapper.insertNewPost(postbean);
+		
+	
+		
 	}
 	
 }

@@ -205,9 +205,18 @@
  
       <!-- Modal content -->
       <div class="modal-content">
-        <span class="close" id="closeBtn">&times;</span>                                                               
-        <p>Some text in the Modal..</p>
+        <span class="close" id="closeBtn">&times;</span>   
+        <p id="modalwriter">작성자:</p>
+        <span>Title</span><input id="modalTitle" name="title" width="10px"><hr>
+        <textarea id="modalcontent"name="content" cols="40" rows="8" ></textarea><br>                                                         
+       <div>
+      	<button class="btn btn-primary" type="button" id="modalSubmit">Submit</button>
+      	<button class="btn btn-secondary" type="button">Cancel</button>
       </div>
+        
+      </div>
+   
+      
  
     </div>
   
@@ -216,6 +225,9 @@
 
   
   <script>
+  
+  
+  // 모달 창 생성 
   var modal = document.getElementById('myModal');
   
   var span = document.getElementsByClassName("close")[0];
@@ -240,12 +252,69 @@
 
  
   
+  
+  // Post Insert
+
+  var modalwriter=$('modalwriter').val();
+  
+//   var modalTitle=$('modalTitle').val();
+  
+//   var modalcontent=$('modalcontent').val();
+  
+  var modalSubmit=document.getElementById("modalSubmit");
+  
+//   var allData ={
+// 		  post_writer_idx: "1" ,
+// 		  post_password: '' , 
+// 		  post_title: $('modalTitle').val(), 
+// 		  post_contents: $('modalcontent').val()
+		   
+//   }
+  
+  
+   modalSubmit.onclick=function(e){
+	  
+	   e.preventDefault();
+	   
+	   //alert(allData.post_title);
+	   
+		register();
+	  
+	  
+  } 
+  
+  
+
+	   
+	
+   function register(){
+	   
+	   console.log($('#modalTitle').val());
+	   console.log($('#modalcontent').val());
+	   
+	   //alert(allData.post_title);
+	   
+		$.ajax({
+			url : '/blog/postInsert',
+			data : JSON.stringify({ "post_writer_idx": "1" ,
+				  "post_password": '' , 
+				  "post_title": $('#modalTitle').val(), 
+				  "post_contents": $('#modalcontent').val()}),
+			type : 'POST',
+			contentType : "application/json; charset=utf-8",
+			success : function() {
+				
+				alert("성공");
+				
+			}
+		}); 
+		   
+   }
+   
+  
   </script>
   
-     <style>
-  
-  
-  </style>
+
   
   
   

@@ -209,17 +209,6 @@ $("#table tr").click(function(){
 		    
 
 
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 
