@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -184,7 +185,23 @@
         <div class="card my-4">
           <h5 class="card-header">Side Widget</h5>
           <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+           
+          
+          <table id="listTable">
+          <tr>
+              <th>臂力格</th>
+              <th>累己老</th>
+          </tr>
+           <c:forEach items="${list}" var="li">
+          <tr>
+         
+             <td><a id="${li.post_idx }" href="#">${li.post_title}</a></td>   
+              <td>${li.post_regdate }</td>   
+		 </tr>
+		 </c:forEach>
+      
+          
+          </table>
           </div>
         </div>
 
@@ -211,7 +228,10 @@
         <textarea id="modalcontent"name="content" cols="40" rows="8" ></textarea><br>                                                         
        <div>
       	<button class="btn btn-primary" type="button" id="modalSubmit">Submit</button>
+      	<button class="btn btn-primary" type="button" id="modalUpdate">Update</button>
+      	<button class="btn btn-primary" type="button" id="modalDelete">Delete</button>      	
       	<button class="btn btn-secondary" type="button">Cancel</button>
+      	
       </div>
         
       </div>
@@ -263,13 +283,7 @@
   
   var modalSubmit=document.getElementById("modalSubmit");
   
-//   var allData ={
-// 		  post_writer_idx: "1" ,
-// 		  post_password: '' , 
-// 		  post_title: $('modalTitle').val(), 
-// 		  post_contents: $('modalcontent').val()
-		   
-//   }
+  var modalUpdate=document.getElementById("modalUpdate");
   
   
    modalSubmit.onclick=function(e){
@@ -289,11 +303,6 @@
 	
    function register(){
 	   
-	   console.log($('#modalTitle').val());
-	   console.log($('#modalcontent').val());
-	   
-	   //alert(allData.post_title);
-	   
 		$.ajax({
 			url : '/blog/postInsert',
 			data : JSON.stringify({ "post_writer_idx": "1" ,
@@ -311,7 +320,52 @@
 		   
    }
    
-  
+   function update(){
+	   
+	   $.ajax({
+			url : '/blog/postUpdate',
+			data : JSON.stringify({ "post_writer_idx": "1" ,
+				  "post_password": '' , 
+				  "post_title": $('#modalTitle').val(), 
+				  "post_contents": $('#modalcontent').val()}),
+			type : 'POST',
+			contentType : "application/json; charset=utf-8",
+			success : function() {
+				
+				alert("己傍");
+				
+			}
+		}); 
+	   
+	   
+   }
+   
+   
+ 
+   function getOnePost(){
+	   $.ajax({
+			url : '/blog/getOnePost',
+			data : ({ "post_idx": $('#modalcontent').val()}),
+			type : 'POST',
+			contentType : "application/json; charset=utf-8",
+			success : function() {
+				
+				alert("己傍");
+				
+			}
+		}); 
+	   
+   }
+   
+   $('#listTable tr').onclick=function(e){
+	   
+	   e.preventDefault();
+	   var click_id=$(this).attr('id');
+	   alert("id"+click_id);
+	   
+	   
+   }
+
   </script>
   
 

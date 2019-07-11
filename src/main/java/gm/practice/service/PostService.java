@@ -31,12 +31,17 @@ public class PostService {
 	
 	public void insertPostService(PostBean postbean){
 		
-		
-
 		mapper.insertNewPost(postbean);
-		
 	
+	}
+	
+	public void updatePostService(PostBean postbean){
+		mapper.modifyPost(postbean);
+	}
+	
+	public PostTo getOnePostService(){
 		
+		return mapper.getOnePost();
 	}
 	
 }

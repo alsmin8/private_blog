@@ -43,4 +43,21 @@ values(
 
 </insert>
 
+
+<update id="modifyPost">
+update posts set
+	post_title=#{post_title},
+	post_contents=#{post_contents},
+		where post_idx=#{post_idx}
+
+</update>
+
+
+<select id="getOnePost" resultType="gm.practice.model.PostTo">
+
+select * from posts
+WHERE post_idx=#{post_idx}
+
+</select>
+
 </mapper>

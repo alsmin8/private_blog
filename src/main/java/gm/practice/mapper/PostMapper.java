@@ -13,4 +13,8 @@ public interface PostMapper {
 	
 	public int insertNewPost(PostBean postbean);
 	
+	public int modifyPost(PostBean postbean);
+
+	public PostTo getOnePost();
+
 }
