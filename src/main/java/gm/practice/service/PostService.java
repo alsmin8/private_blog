@@ -35,13 +35,20 @@ public class PostService {
 	
 	}
 	
-	public void updatePostService(PostBean postbean){
-		mapper.modifyPost(postbean);
+	public int updatePostService(PostBean postbean){
+		return mapper.modifyPost(postbean);
+
 	}
 	
-	public PostTo getOnePostService(){
+	public PostTo getOnePostService(int post_idx){
 		
-		return mapper.getOnePost();
+		return mapper.getOnePost(post_idx);
+	}
+	
+	
+	public int deletePostService(int post_idx){
+		
+		return mapper.deletePost(post_idx);
 	}
 	
 }

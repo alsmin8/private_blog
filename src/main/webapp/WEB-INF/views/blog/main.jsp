@@ -320,20 +320,34 @@
 		   
    }
    
-   function update(){
+   function update(allData){
 	   
 	   $.ajax({
 			url : '/blog/postUpdate',
-			data : JSON.stringify({ "post_writer_idx": "1" ,
-				  "post_password": '' , 
-				  "post_title": $('#modalTitle').val(), 
-				  "post_contents": $('#modalcontent').val()}),
+			data : JSON.stringify(allData),
 			type : 'POST',
 			contentType : "application/json; charset=utf-8",
 			success : function() {
 				
 				alert("성공");
-				
+				//location.href="/blog/main";
+			}
+		}); 
+	   
+	   
+   }
+   
+ function deletePost(post_idx){
+	   
+
+	   $.ajax({
+			url : '/blog/postDelete',
+			data : { "post_idx": post_idx},
+			type : 'POST',
+			success : function() {
+
+				alert("성공");
+				//location.href="/blog/main";
 			}
 		}); 
 	   
@@ -342,29 +356,81 @@
    
    
  
-   function getOnePost(){
+   function getOnePost(choice_id){
+
 	   $.ajax({
 			url : '/blog/getOnePost',
-			data : ({ "post_idx": $('#modalcontent').val()}),
+			data : { "post_idx": choice_id},
+			dataType:'json', //서버로부터 받는 데이터의 타입
 			type : 'POST',
-			contentType : "application/json; charset=utf-8",
-			success : function() {
+			success : function(result) {
+
+				console.log( "json : " + JSON.stringify(result)  );
+
+				var post_title=result["post_title"];
+				var post_contents=result["post_contents"];
+				var post_regdate=result["post_regdate"];
+				var post_idx=result["post_idx"];
 				
-				alert("성공");
+				console.log( "post_title : " + post_title  );
 				
+				// 모달창 띄움
+				$('#modalTitle').val(post_title);
+				$('#modalcontent').val(post_contents);
+				$('#modalSubmit').remove();
+				modifyModalPop();
+				
+				
+
+				// 게시글 수정
+				$('#modalUpdate').click(function(){
+				
+					
+					allData={ "post_writer_idx": "1" ,
+							  "post_password": '' , 
+							  "post_idx": post_idx , 
+							  "post_title": $('#modalTitle').val(), 
+							  "post_contents": $('#modalcontent').val()}
+					
+					update(allData);
+					
+				});
+			
+				//게시글 삭제
+				$('#modalDelete').click(function(){
+					
+					deletePost(post_idx);
+					
+				});
+				
+				
+			}, error: function(){
+				
+				alert("실패");
 			}
 		}); 
 	   
    }
    
-   $('#listTable tr').onclick=function(e){
+
+   
+   $("#listTable tr").click(function(){        
+	  
+	   var choice_id = $(this).closest('tr').find('a').attr('id'); // tr의 가장 가까운 a의 id 갖고옴
+	   //alert(choice_id);
+
+	   getOnePost(choice_id);
+	
 	   
-	   e.preventDefault();
-	   var click_id=$(this).attr('id');
-	   alert("id"+click_id);
 	   
+	 }); 
 	   
-   }
+   
+   function modifyModalPop() {
+	      modal.style.display = "block";
+	  }
+
+   
 
   </script>
   

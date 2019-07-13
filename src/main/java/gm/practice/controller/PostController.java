@@ -27,17 +27,13 @@ public class PostController {
 	@RequestMapping("/main")
 	public void test(Model model) {
 
-		// System.out.println("test:"+service.getListService().toString());
-
-		// System.out.println("test2:"+service.getNewPost().toString());
-
 		PostTo newPost = service.getNewPost();
 		
 		List<PostTo> list=service.getListService();
 		
 		model.addAttribute("list", list);
 		
-		System.out.println(list.toString());
+		//System.out.println(list.toString());
 
 		model.addAttribute("newPost", newPost);
 		
@@ -45,13 +41,20 @@ public class PostController {
 
 	}
 	
-	@RequestMapping("/getOnePost")
-	public void getOnePost(Model model, @RequestParam int post_idx) {
+	@ResponseBody
+	@RequestMapping(value="/getOnePost")
+	public PostTo getOnePost(Model model, @RequestParam int post_idx ) {
 
-		PostTo onePost = service.getOnePostService();		
-
+		
+		
+		
+		PostTo onePost = service.getOnePostService(post_idx);
+		
+		//System.out.println(onePost.toString());
+		
 		model.addAttribute("onePost", onePost);
 		
+		return onePost;
 		
 
 	}
@@ -62,7 +65,7 @@ public class PostController {
 	@RequestMapping(value = "/postInsert", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public String postInsert(@RequestBody PostBean postbean) {
 		
-		System.out.println("포스트 빈 확인:"+postbean.toString());
+		//System.out.println("포스트 빈 확인:"+postbean.toString());
 		service.insertPostService(postbean);
 
 		return "redirect:/blog/main";
@@ -73,14 +76,25 @@ public class PostController {
 	@RequestMapping(value = "/postUpdate", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public String postUpdate(@RequestBody PostBean postbean) {
 		
-		System.out.println("포스트 빈 확인:"+postbean.toString());
-		service.updatePostService(postbean);
+		//System.out.println("포스트 빈 확인:"+postbean.toString());
+		int test=service.updatePostService(postbean);
 		
-		return "redirect:/blog/main";
-
+		//System.out.println(test);
+		
+		return "/blog/main";
 	}
 	
 	
+	
+	@RequestMapping(value="/postDelete")
+	public String postDelete(@RequestParam int post_idx) {
+		
+		int test=service.deletePostService(post_idx);
+		
+		
+		
+		return "/blog/main";
+	}
 	
 	
 	

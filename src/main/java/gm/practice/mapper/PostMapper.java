@@ -15,6 +15,8 @@ public interface PostMapper {
 	
 	public int modifyPost(PostBean postbean);
 
-	public PostTo getOnePost();
+	public PostTo getOnePost(int post_idx);
+	
+	public int deletePost(int post_idx);
 
 }
