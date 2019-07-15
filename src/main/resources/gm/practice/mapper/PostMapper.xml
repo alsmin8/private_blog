@@ -12,7 +12,7 @@
 
 <select id="getPostsList" resultType="gm.practice.model.PostTo">
 select * from posts
-
+order by post_regdate DESC
 </select>
 
 
