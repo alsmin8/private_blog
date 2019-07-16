@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import gm.practice.model.PostBean;
 import gm.practice.model.PostTo;
 import gm.practice.service.PostService;
@@ -111,6 +113,18 @@ public class PostController {
 		System.out.println(list);
 
 		return "/blog/practice";
+
+	}
+	
+	@RequestMapping("/treepractice")
+	public void treepractice(Model model) {
+
+		List<PostTo> list=service.getListService();
+		
+		
+		model.addAttribute("list", list);
+
+		
 
 	}
 	
