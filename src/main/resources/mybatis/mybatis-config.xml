@@ -10,7 +10,7 @@
 <configuration>
 
 	<typeAliases>
-	<typeAlias type="gm.practice.model.UserDao" alias="userDao"/>
+	<typeAlias type="gm.practice.model.UserTo" alias="userTo"/>
 
 
 	</typeAliases>

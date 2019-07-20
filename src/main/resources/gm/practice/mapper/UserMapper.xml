@@ -12,9 +12,17 @@
 select NOW()
 </select>
 
-<select id="listUser" resultType="gm.practice.model.UserDao">
+<select id="listUser" resultType="gm.practice.model.UserTo">
 select * from user
 </select>
+
+<select id="loginUser" resultType="gm.practice.model.UserTo">
+select * from user
+WHERE user_id=#{user_id}
+
+
+</select>
+
 
 
 </mapper>

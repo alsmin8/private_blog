@@ -3,7 +3,7 @@ package gm.practice.model;
 import lombok.Data;
 
 @Data
-public class UserDao {
+public class UserTo {
 
 	private int user_no;
 	
